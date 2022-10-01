@@ -1,6 +1,10 @@
+<p id="notice">
+  <%= flash[:notice] %>
+</p>
+
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render 'books/list',books: @books,user: @user %>
+    <%= render 'list',user: @user %>
     <div class="col-md-8 offset-md-1">
       <h2>Book detail</h2>
       <table class="table">
@@ -13,22 +17,26 @@
               <% end %>
             </td>
             <td>
-              <%= link_to book_path(@user.id) do %>
+              <%= link_to book_path(@books.id) do %>
                 <%= @books.title %>
-              <% end %>  
+              <% end %>
             </td>
             <td><%= @books.body %></td>
             <td>
-              <%= link_to "Edit",edit_book_path(@user.id),class:"btn btn-sm btn-success" %>
+            <% if @books.user==current_user %>
+              <%= link_to "Edit",edit_book_path(@books.id),class:"btn btn-sm btn-success" %>
+            <% end %>
             </td>
             <td>
-              <%= link_to "Destroy",book_path(@user.id),method: :destroy,"data-confirm"=>"本当に消しますか？",class:"btn btn-sm btn-danger" %>
+            <% if @books.user==current_user %>
+              <%= link_to "Destroy",book_path(@books.id),method: :delete,"data-confirm"=>"本当に消しますか？",class:"btn btn-sm btn-danger" %>
+            <% end %>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  
+
 </div>
 

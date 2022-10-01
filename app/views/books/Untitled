@@ -1,3 +1,6 @@
 <%= link_to "edit",url:edit_user_path(user.id),class:"btn btn-outline-secondary btn-block" %>
 
 .variant(resize_to_limit:[width,height]).processed
+
+      <%= render 'shared/flash_message' %>
+  add_flash_types :success, :info, :warning, :danger
